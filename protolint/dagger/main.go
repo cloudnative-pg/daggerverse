@@ -10,7 +10,8 @@ type Protolint struct {
 func New(
 	// Protolint image to use.
 	// +optional
-	// +default="yoheimuta/protolint"
+	// renovate image: datasource=docker depName=yoheimuta/protolint versioning=docker
+	// +default="yoheimuta/protolint:0.49.3"
 	Image string,
 ) *Protolint {
 	return &Protolint{
