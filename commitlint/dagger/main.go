@@ -11,7 +11,8 @@ type Commitlint struct {
 func New(
 	// Commitlint image to use.
 	// +optional
-	// +default="commitlint/commitlint"
+	// renovate image: datasource=docker depName=commitlint/commitlint versioning=docker
+	// +default="commitlint/commitlint:19.2.1"
 	Image string,
 ) *Commitlint {
 	return &Commitlint{

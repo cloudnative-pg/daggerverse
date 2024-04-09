@@ -10,7 +10,8 @@ type ProtocGenDoc struct {
 func New(
 	// ProtocGenDoc image to use.
 	// +optional
-	// +default="pseudomuto/protoc-gen-doc"
+	// renovate image: datasource=docker depName=pseudomuto/protoc-gen-doc versioning=docker
+	// +default="pseudomuto/protoc-gen-doc:1.5"
 	Image string,
 ) *ProtocGenDoc {
 	return &ProtocGenDoc{

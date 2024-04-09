@@ -10,7 +10,8 @@ type Uncommitted struct {
 func New(
 	// Python image to use.
 	// +optional
-	// +default="python:3.12-alpine"
+	// renovate image: datasource=docker depName=python versioning=docker
+	// +default="python:3.12.2-alpine"
 	Image string,
 ) *Uncommitted {
 	return &Uncommitted{

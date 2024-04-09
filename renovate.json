@@ -1,0 +1,67 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":gitSignOff",
+    ":semanticCommitType(chore)",
+    ":labels(automated,no-issue)",
+    "regexManagers:githubActionsVersions"
+  ],
+  "prConcurrentLimit": 5,
+  "ignorePaths": [
+    "docs/**",
+    "pkg/**/*.pb.go"
+  ],
+  "postUpdateOptions": [
+    "gomodTidy"
+  ],
+  "semanticCommits": "enabled",
+  "commitBodyTable": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^.*\\.go$)"
+      ],
+      "matchStrings": [
+        "\\/\\/ renovate image: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=[\"']?[^:]+:(?<currentValue>.+?)[\"']?\\s"
+      ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^protoc-gen-go-grpc/dagger/main\\.go$)"
+      ],
+      "matchStrings": [
+        "\\/\\/ renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=[\"']?(?<currentValue>.+?)[\"']?\\s"
+      ]
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "(^.*dagger\\.json$)"
+      ],
+      "matchStrings": [
+        "\"engineVersion\": \"(?<currentValue>.+?)\""
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "dagger/dagger"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "go"
+      ],
+      "matchPackagePatterns": [
+        "*"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "digest"
+      ],
+      "groupName": "all non-major go dependencies"
+    }
+  ]
+}

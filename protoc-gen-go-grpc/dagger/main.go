@@ -16,15 +16,19 @@ type ProtocGenGoGRPC struct {
 func New(
 	// Custom image to use to run protoc.
 	// +optional
-	// +default="golang:1.22-bookworm"
+	// renovate image: datasource=docker depName=golang versioning=docker
+	// +default="golang:1.22.2-bookworm"
 	goImage string,
 	// +optional
+	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
 	// +default="26.1"
 	protobufVersion string,
 	// +optional
+	// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
 	// +default="v1.33.0"
 	protocGenGoVersion string,
 	// +optional
+	// renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
 	// +default="v1.3.0"
 	protocGenGoGRPCVersion string,
 ) *ProtocGenGoGRPC {
