@@ -25,11 +25,11 @@ func New(
 	protobufVersion string,
 	// +optional
 	// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
-	// +default="v1.33.0"
+	// +default="v1.34.2"
 	protocGenGoVersion string,
 	// +optional
 	// renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
-	// +default="v1.3.0"
+	// +default="v1.4.0"
 	protocGenGoGRPCVersion string,
 ) *ProtocGenGoGRPC {
 	protobufRelURL := fmt.Sprintf("https://github.com/protocolbuffers/protobuf/releases/download/v%v/protoc-%v-linux-x86_64.zip",
