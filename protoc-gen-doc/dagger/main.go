@@ -1,10 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"main/internal/dagger"
+)
 
 type ProtocGenDoc struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -21,20 +24,20 @@ func New(
 
 // Generate runs protoc-gen-doc on proto files, returning the generated documentation as a directory.
 //
-// Example usage: dagger call run --proto-dir /path/ --doc-opt "markdown,docs.md"
+// Example usage: dagger call generate --proto-dir /path/ --doc-opt "markdown,docs.md"
 func (m *ProtocGenDoc) Generate(
 	// The directory of the proto files.
-	protoDir *Directory,
+	protoDir *dagger.Directory,
 	// +optional
 	// +default="markdown,docs.md"
 	// The doc_opt flag to pass to protoc-gen-doc.
 	docOpt string,
-) *Directory {
+) *dagger.Directory {
 	const outDir = "/out"
 
 	return m.Ctr.
 		WithMountedDirectory("/protos", protoDir).
-		WithExec([]string{"mkdir", outDir}, ContainerWithExecOpts{SkipEntrypoint: true}).
-		WithExec([]string{fmt.Sprintf("--doc_opt=%v", docOpt)}).
+		WithExec([]string{"mkdir", outDir}).
+		WithExec([]string{fmt.Sprintf("--doc_opt=%v", docOpt)}, dagger.ContainerWithExecOpts{UseEntrypoint: true}).
 		Directory(outDir)
 }

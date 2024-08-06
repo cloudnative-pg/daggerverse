@@ -6,11 +6,13 @@ import (
 	"context"
 	"fmt"
 	"path"
+
+	"dagger/protoc-gen-go-grpc/internal/dagger"
 )
 
 type ProtocGenGoGRPC struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -55,22 +57,27 @@ func New(
 }
 
 // Container get the current container
-func (m *ProtocGenGoGRPC) Container() *Container {
+func (m *ProtocGenGoGRPC) Container() *dagger.Container {
 	return m.Ctr
 }
 
 // Run runs protoc on proto files, returning the generated go files as a directory.
+//
+//	Example: dagger call run --source . \
+//	    --go-opt module=github.com/cloudnative-pg/cnpg-i \
+//	    --go-grpcopt module=github.com/cloudnative-pg/cnpg-i \
+//	    --proto-path proto -o .
 func (m *ProtocGenGoGRPC) Run(
 	ctx context.Context,
 	// The source directory.
-	source *Directory,
+	source *dagger.Directory,
 	// The path to the proto files, relative to the source directory.
 	protoPath string,
 	// go_opt flag to pass to protoc.
 	goOpt string,
 	// go-grpc_opt flag to pass to protoc.
 	goGRPCOpt string,
-) (*Directory, error) {
+) (*dagger.Directory, error) {
 	args := []string{"/usr/local/bin/protoc"}
 	args = append(args, "--go_out=/out/")
 	args = append(args, fmt.Sprintf("--go_opt=%v", goOpt))

@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
+	"dagger/spellcheck/internal/dagger"
 )
 
 type Spellcheck struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -27,8 +28,8 @@ func New(
 func (m *Spellcheck) Spellcheck(
 	ctx context.Context,
 	// The directory of the repository.
-	source *Directory,
-) *Container {
+	source *dagger.Directory,
+) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src")

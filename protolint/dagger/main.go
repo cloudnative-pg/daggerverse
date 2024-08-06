@@ -1,10 +1,13 @@
 package main
 
-import "context"
+import (
+	"context"
+	"main/internal/dagger"
+)
 
 type Protolint struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -21,17 +24,17 @@ func New(
 
 // Lint runs protolint on proto files.
 //
-// Example usage: dagger call run --source /path/ --args "-config_path=.protolint.yaml" --args .
+// Example usage: dagger call lint --source /path/ --args "-config_path=.protolint.yaml" --args .
 func (m *Protolint) Lint(
 	ctx context.Context,
 	// The directory of the repository.
-	source *Directory,
+	source *dagger.Directory,
 	// A list of arguments to pass to commitlint.
 	// +optional
 	args []string,
-) *Container {
+) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src").
-		WithExec(append([]string{"lint"}, args...))
+		WithExec(append([]string{"lint"}, args...), dagger.ContainerWithExecOpts{UseEntrypoint: true})
 }

@@ -1,11 +1,14 @@
 // This module runs commitlint to validate conventional commits.
 package main
 
-import "context"
+import (
+	"context"
+	"main/internal/dagger"
+)
 
 type Commitlint struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -26,13 +29,13 @@ func New(
 func (m *Commitlint) Lint(
 	ctx context.Context,
 	// The directory of the repository.
-	source *Directory,
+	source *dagger.Directory,
 	// +optional
 	// A list of arguments to pass to commitlint.
 	args []string,
-) *Container {
+) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src").
-		WithExec(args)
+		WithExec(args, dagger.ContainerWithExecOpts{UseEntrypoint: true})
 }
