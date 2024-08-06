@@ -32,5 +32,6 @@ func (m *Spellcheck) Spellcheck(
 ) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
-		WithWorkdir("/src")
+		WithWorkdir("/src").
+		WithExec(nil, dagger.ContainerWithExecOpts{UseEntrypoint: true})
 }
