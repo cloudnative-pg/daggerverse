@@ -2,9 +2,11 @@
 
 package main
 
+import "dagger/uncommitted/internal/dagger"
+
 type Uncommitted struct {
 	// +private
-	Ctr *Container
+	Ctr *dagger.Container
 }
 
 func New(
@@ -24,7 +26,7 @@ func New(
 // CheckUncommitted runs check_uncommitted_git_changes
 //
 // Example usage: dagger call check-uncommitted --source /path/to/your/repo
-func (m *Uncommitted) CheckUncommitted(source *Directory) *Container {
+func (m *Uncommitted) CheckUncommitted(source *dagger.Directory) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
 		WithWorkdir("/src").
