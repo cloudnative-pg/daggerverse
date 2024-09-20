@@ -5,7 +5,8 @@
     ":gitSignOff",
     ":semanticCommitType(chore)",
     ":labels(automated,no-issue)",
-    "regexManagers:githubActionsVersions"
+    "regexManagers:githubActionsVersions",
+    ":automergeMinor"
   ],
   "prConcurrentLimit": 5,
   "ignorePaths": [
