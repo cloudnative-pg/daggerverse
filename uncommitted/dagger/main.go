@@ -11,7 +11,7 @@ func New(
 	// Python image to use.
 	// +optional
 	// renovate image: datasource=docker depName=python versioning=docker
-	// +default="python:3.12.4-alpine"
+	// +default="python:3.12.6-alpine"
 	Image string,
 ) *Uncommitted {
 	return &Uncommitted{
