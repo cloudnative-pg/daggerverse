@@ -14,7 +14,7 @@ func New(
 	// Spellcheck image to use.
 	// +optional
 	// renovate image: datasource=docker depName=jonasbn/github-action-spellcheck versioning=docker
-	// +default="jonasbn/github-action-spellcheck:0.43.1"
+	// +default="jonasbn/github-action-spellcheck:0.45.0"
 	Image string,
 ) *Spellcheck {
 	return &Spellcheck{
