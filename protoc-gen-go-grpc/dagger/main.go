@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"path"
+	"strings"
 
 	"dagger/protoc-gen-go-grpc/internal/dagger"
 )
@@ -34,8 +35,8 @@ func New(
 	// +default="v1.3.0"
 	protocGenGoGRPCVersion string,
 ) *ProtocGenGoGRPC {
-	protobufRelURL := fmt.Sprintf("https://github.com/protocolbuffers/protobuf/releases/download/v%v/protoc-%v-linux-x86_64.zip",
-		protobufVersion, protobufVersion)
+	protobufRelURL := fmt.Sprintf("https://github.com/protocolbuffers/protobuf/releases/download/%v/protoc-%v-linux-x86_64.zip",
+		protobufVersion, strings.TrimPrefix(protobufVersion, "v"))
 
 	protobuf := dag.Container().
 		From(goImage).
