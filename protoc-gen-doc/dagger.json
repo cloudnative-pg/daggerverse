@@ -2,5 +2,5 @@
   "name": "protoc-gen-doc",
   "sdk": "go",
   "source": "dagger",
-  "engineVersion": "v0.14.0"
+  "engineVersion": "v0.15.1"
 }
