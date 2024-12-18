@@ -24,7 +24,7 @@ func New(
 	goImage string,
 	// +optional
 	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
-	// +default="v29.1"
+	// +default="v29.2"
 	protobufVersion string,
 	// +optional
 	// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
