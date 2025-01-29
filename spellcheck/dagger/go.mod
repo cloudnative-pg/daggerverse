@@ -2,7 +2,7 @@ module dagger/spellcheck
 
 go 1.22.7
 
-toolchain go1.23.2
+toolchain go1.23.5
 
 require (
 	github.com/99designs/gqlgen v0.17.57
