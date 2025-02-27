@@ -26,15 +26,7 @@
       ],
       matchStrings: [
         '\\/\\/ renovate image: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?[^:]+:(?<currentValue>.+?)["\']?\\s',
-      ],
-    },
-    {
-      customType: 'regex',
-      fileMatch: [
-        '(^protoc-gen-go-grpc/dagger/main\\.go$)',
-      ],
-      matchStrings: [
-        '\\/\\/ renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?(?<currentValue>.+?)["\']?\\s',
+        '\\/\\/ renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?(?<currentValue>.+?)["\']?\\s'
       ],
     },
     {

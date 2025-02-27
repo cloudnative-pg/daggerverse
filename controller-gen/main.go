@@ -27,16 +27,15 @@ type ControllerGen struct {
 }
 
 func New(
-	// ControllerGen  to use.
+	// ControllerGen to use.
 	// +optional
-	// renovate image: datasource=github-tags depName=kubernetes-sigs/controller-tools versioning=semver
-	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
+	// renovate: datasource=github-tags depName=kubernetes-sigs/controller-tools versioning=semver
 	// +default="0.16.2"
 	controllerGenVersion string,
 	// +optional
 	// renovate image: datasource=docker depName=golang versioning=docker
-	// +default="1.23.1"
-	golangVersion string,
+	// +default="golang:1.24.0-bookworm"
+	goImage string,
 	// +optional
 	ctr *dagger.Container,
 ) *ControllerGen {
@@ -46,7 +45,7 @@ func New(
 		}
 	}
 	return &ControllerGen{
-		Ctr: dag.Container().From(fmt.Sprintf("golang:%v", golangVersion)).
+		Ctr: dag.Container().From(goImage).
 			WithExec([]string{"go", "install",
 				fmt.Sprintf("sigs.k8s.io/controller-tools/cmd/controller-gen@v%v", controllerGenVersion)}),
 	}
