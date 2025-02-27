@@ -1,6 +1,6 @@
 {
   "name": "spellcheck",
-  "engineVersion": "v0.15.1",
+  "engineVersion": "v0.16.2",
   "sdk": "go",
   "source": "dagger"
 }
