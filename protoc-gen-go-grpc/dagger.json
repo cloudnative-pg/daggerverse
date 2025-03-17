@@ -1,6 +1,8 @@
 {
   "name": "protoc-gen-go-grpc",
-  "engineVersion": "v0.15.1",
-  "sdk": "go",
+  "engineVersion": "v0.16.3",
+  "sdk": {
+    "source": "go"
+  },
   "source": "dagger"
 }
