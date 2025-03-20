@@ -56,11 +56,15 @@ func (m *Genref) Genref(
 	// The directory of the repository.
 	source *dagger.Directory,
 	// +optional
+	// +default="docs"
+	// The directory from where the command should run
+	workDir string,
+	// +optional
 	// A list of arguments to pass to genref.
 	args []string,
 ) *dagger.Container {
 	return m.Ctr.
 		WithMountedDirectory("/src", source).
-		WithWorkdir("/src").
+		WithWorkdir(fmt.Sprintf("/src/%s", workDir)).
 		WithExec(append([]string{"genref"}, args...))
 }
