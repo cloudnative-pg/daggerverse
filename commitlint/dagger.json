@@ -1,6 +1,6 @@
 {
   "name": "commitlint",
-  "engineVersion": "v0.16.3",
+  "engineVersion": "v0.17.2",
   "sdk": {
     "source": "go"
   },
