@@ -41,20 +41,7 @@
       depNameTemplate: 'dagger/dagger',
     },
   ],
-  packageRules: [
-    {
-      matchDatasources: [
-        'go',
-      ],
-      matchUpdateTypes: [
-        'minor',
-        'patch',
-        'digest',
-      ],
-      groupName: 'all non-major go dependencies',
-      matchPackageNames: [
-        '*',
-      ],
-    },
-  ],
+  gomod: {
+    enabled: false,
+  },
 }
