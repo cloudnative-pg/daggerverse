@@ -1,0 +1,7 @@
+{
+  "name": "genref",
+  "engineVersion": "v0.17.2",
+  "sdk": {
+    "source": "go"
+  }
+}
