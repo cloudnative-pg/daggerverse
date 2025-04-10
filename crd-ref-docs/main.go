@@ -18,7 +18,7 @@ type Renderer string
 
 const (
 	// Asciidoc is the Asciidoc renderer.
-	Asciidoc Renderer = "asciidoc"
+	Asciidoc Renderer = "asciidoctor"
 	// Markdown is the Markdown renderer.
 	Markdown Renderer = "markdown"
 )
