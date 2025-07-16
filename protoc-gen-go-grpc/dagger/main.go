@@ -20,7 +20,7 @@ func New(
 	// Custom image to use to run protoc.
 	// +optional
 	// renovate image: datasource=docker depName=golang versioning=docker
-	// +default="golang:1.24.3-bookworm"
+	// +default="golang:1.24.5-bookworm"
 	goImage string,
 	// +optional
 	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
