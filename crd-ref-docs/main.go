@@ -65,7 +65,7 @@ func (m *CrdRefDocs) Generate(
 // The path of the template director, relative to the source directory.
 	templatesDir string,
 // +optional
-// +default="asciidoc"
+// +default="asciidoctor"
 // The renderer for the generated documentation.
 	renderer Renderer,
 // +optional
