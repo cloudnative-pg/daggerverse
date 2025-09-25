@@ -17,6 +17,7 @@ type ProtocGenGoGRPC struct {
 }
 
 func New(
+	ctx context.Context,
 	// Custom image to use to run protoc.
 	// +optional
 	// renovate image: datasource=docker depName=golang versioning=docker
@@ -24,7 +25,7 @@ func New(
 	goImage string,
 	// +optional
 	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
-	// +default="v30.2"
+	// +default="v32.1"
 	protobufVersion string,
 	// +optional
 	// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
@@ -34,12 +35,27 @@ func New(
 	// renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
 	// +default="v1.5.1"
 	protocGenGoGRPCVersion string,
-) *ProtocGenGoGRPC {
-	protobufRelURL := fmt.Sprintf("https://github.com/protocolbuffers/protobuf/releases/download/%v/protoc-%v-linux-x86_64.zip",
-		protobufVersion, strings.TrimPrefix(protobufVersion, "v"))
-
+) (*ProtocGenGoGRPC, error) {
+	architecturesMap := map[string]string{
+		"aarch64": "aarch_64",
+	}
 	protobuf := dag.Container().
-		From(goImage).
+		From(goImage)
+
+	architecture, err := protobuf.WithExec([]string{"uname", "-m"}).Stdout(ctx)
+	if err != nil {
+		return nil, err
+	}
+	architecture = strings.TrimRight(architecture, "\n")
+
+	if remappedArchitecture, ok := architecturesMap[architecture]; ok {
+		architecture = remappedArchitecture
+	}
+
+	protobufRelURL := fmt.Sprintf("https://github.com/protocolbuffers/protobuf/releases/download/%v/protoc-%v-linux-%v.zip",
+		protobufVersion, strings.TrimPrefix(protobufVersion, "v"), architecture)
+
+	protobuf = protobuf.
 		WithExec([]string{"apt", "update"}).
 		WithExec([]string{"apt", "install", "-y", "unzip"}).
 		WithExec([]string{"curl", "-LO", protobufRelURL}).
@@ -54,7 +70,7 @@ func New(
 
 	return &ProtocGenGoGRPC{
 		Ctr: protobuf,
-	}
+	}, nil
 }
 
 // Container get the current container
