@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"path"
+	"runtime"
 	"strings"
 
 	"dagger/protoc-gen-go-grpc/internal/dagger"
@@ -18,36 +19,34 @@ type ProtocGenGoGRPC struct {
 
 func New(
 	ctx context.Context,
-	// Custom image to use to run protoc.
-	// +optional
-	// renovate image: datasource=docker depName=golang versioning=docker
-	// +default="golang:1.24.5-bookworm"
+// Custom image to use to run protoc.
+// +optional
+// renovate image: datasource=docker depName=golang versioning=docker
+// +default="golang:1.24.5-bookworm"
 	goImage string,
-	// +optional
-	// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
-	// +default="v32.1"
+// +optional
+// renovate: datasource=github-tags depName=protocolbuffers/protobuf versioning="regex:^v?(?<major>\\d+)\\.(?<minor>\\d+)$"
+// +default="v32.1"
 	protobufVersion string,
-	// +optional
-	// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
-	// +default="v1.36.6"
+// +optional
+// renovate: datasource=go depName=google.golang.org/protobuf/cmd/protoc-gen-go versioning=semver
+// +default="v1.36.6"
 	protocGenGoVersion string,
-	// +optional
-	// renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
-	// +default="v1.5.1"
+// +optional
+// renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
+// +default="v1.5.1"
 	protocGenGoGRPCVersion string,
 ) (*ProtocGenGoGRPC, error) {
 	architecturesMap := map[string]string{
-		"aarch64": "aarch_64",
+		"arm64": "aarch_64",
+		"amd64": "x86_64",
+		"ppc":   "ppcle_64",
+		"s390x": "s390_64",
 	}
 	protobuf := dag.Container().
 		From(goImage)
 
-	architecture, err := protobuf.WithExec([]string{"uname", "-m"}).Stdout(ctx)
-	if err != nil {
-		return nil, err
-	}
-	architecture = strings.TrimRight(architecture, "\n")
-
+	architecture := runtime.GOARCH
 	if remappedArchitecture, ok := architecturesMap[architecture]; ok {
 		architecture = remappedArchitecture
 	}
