@@ -30,7 +30,7 @@ func New(
 	// ControllerGen to use.
 	// +optional
 	// renovate: datasource=github-tags depName=kubernetes-sigs/controller-tools versioning=semver
-	// +default="0.18.0"
+	// +default="0.19.0"
 	controllerGenVersion string,
 	// +optional
 	// renovate image: datasource=docker depName=golang versioning=docker
