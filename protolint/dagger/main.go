@@ -14,7 +14,7 @@ func New(
 	// Protolint image to use.
 	// +optional
 	// renovate image: datasource=docker depName=yoheimuta/protolint versioning=docker
-	// +default="yoheimuta/protolint:0.55.6"
+	// +default="yoheimuta/protolint:0.56.4"
 	Image string,
 ) *Protolint {
 	return &Protolint{
