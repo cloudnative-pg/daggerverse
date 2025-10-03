@@ -37,7 +37,7 @@ func New(
 // Go image to use.
 // +optional
 // renovate image: datasource=docker depName=golang versioning=docker
-// +default="golang:1.24.5-alpine"
+// +default="golang:1.25.1-alpine"
 	Image string,
 // CrdRefDocs version to use.
 // +optional
