@@ -30,7 +30,7 @@ func New(
 // GoLicenses to use.
 // +optional
 // renovate: datasource=github-tags depName=google/go-licenses versioning=semver
-// +default="1.6.0"
+// +default="2.0.1"
 	goLicensesVersion string,
 // +optional
 // renovate image: datasource=docker depName=golang versioning=docker
