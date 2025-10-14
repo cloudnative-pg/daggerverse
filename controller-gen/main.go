@@ -34,7 +34,7 @@ func New(
 	controllerGenVersion string,
 	// +optional
 	// renovate image: datasource=docker depName=golang versioning=docker
-	// +default="golang:1.25.1-bookworm"
+	// +default="golang:1.25.3-bookworm"
 	goImage string,
 	// +optional
 	ctr *dagger.Container,
