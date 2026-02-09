@@ -19,7 +19,7 @@ func New(
 	return &Uncommitted{
 		Ctr: dag.Container().From(Image).
 			WithExec([]string{"apk", "add", "git"}).
-			WithExec([]string{"pip", "install", "setuptools", "check-uncommitted-git-changes"}),
+			WithExec([]string{"pip", "install", "setuptools==81.0.0", "check-uncommitted-git-changes"}),
 	}
 }
 
