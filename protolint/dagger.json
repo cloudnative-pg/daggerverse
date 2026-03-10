@@ -1,6 +1,6 @@
 {
   "name": "protolint",
-  "engineVersion": "v0.19.5",
+  "engineVersion": "v0.20.1",
   "sdk": {
     "source": "go"
   },
