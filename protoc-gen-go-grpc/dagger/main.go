@@ -34,7 +34,7 @@ func New(
 	protocGenGoVersion string,
 // +optional
 // renovate: datasource=go depName=google.golang.org/grpc/cmd/protoc-gen-go-grpc versioning=semver
-// +default="v1.5.1"
+// +default="v1.6.1"
 	protocGenGoGRPCVersion string,
 ) (*ProtocGenGoGRPC, error) {
 	architecturesMap := map[string]string{
