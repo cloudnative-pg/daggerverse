@@ -21,18 +21,18 @@
   customManagers: [
     {
       customType: 'regex',
-      fileMatch: [
-        '(^.*\\.go$)',
+      managerFilePatterns: [
+        '/(^.*\\.go$)/',
       ],
       matchStrings: [
         '\\/\\/ renovate image: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?[^:]+:(?<currentValue>.+?)["\']?\\s',
-        '\\/\\/ renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?(?<currentValue>.+?)["\']?\\s'
+        '\\/\\/ renovate: datasource=(?<datasource>[a-z-.]+?) depName=(?<depName>[^\\s]+?)(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?\\s+\\/\\/\\s+\\+default=["\']?(?<currentValue>.+?)["\']?\\s',
       ],
     },
     {
       customType: 'regex',
-      fileMatch: [
-        '(^.*dagger\\.json$)',
+      managerFilePatterns: [
+        '/(^.*dagger\\.json$)/',
       ],
       matchStrings: [
         '"engineVersion": "(?<currentValue>.+?)"',
