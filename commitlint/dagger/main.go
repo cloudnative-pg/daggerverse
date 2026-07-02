@@ -15,7 +15,7 @@ func New(
 	// Commitlint image to use.
 	// +optional
 	// renovate image: datasource=docker depName=commitlint/commitlint versioning=docker
-	// +default="commitlint/commitlint:21.1.0"
+	// +default="commitlint/commitlint:21.2.0"
 	Image string,
 ) *Commitlint {
 	return &Commitlint{
