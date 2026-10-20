@@ -34,7 +34,7 @@ func New(
 	goLicensesVersion string,
 // +optional
 // renovate image: datasource=docker depName=golang versioning=docker
-// +default="golang:1.27.2-alpine"
+// +default="golang:1.27.3-alpine"
 	goImage string,
 // +optional
 	ctr *dagger.Container,
