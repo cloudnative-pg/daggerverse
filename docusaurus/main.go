@@ -121,15 +121,17 @@ func (m *Docusaurus) Build() *dagger.Directory {
 func (m *Docusaurus) Serve() *dagger.Service {
 	return m.Base().
 		WithExec([]string{m.packageManager(), "run", "build"}).
-		WithExec([]string{m.packageManager(), "run", "serve", "--build"}).
-		AsService()
+		AsService(dagger.ContainerAsServiceOpts{
+			Args: []string{m.packageManager(), "run", "serve", "--build", "--host", "0.0.0.0"},
+		})
 }
 
 // Build and serve development docs as a service
 func (m *Docusaurus) ServeDev() *dagger.Service {
 	return m.Base().
-		WithExec([]string{m.packageManager(), "start", "--", "--host", "0.0.0.0"}).
-		AsService()
+		AsService(dagger.ContainerAsServiceOpts{
+			Args: []string{m.packageManager(), "start", "--", "--host", "0.0.0.0"},
+		})
 }
 
 func (m *Docusaurus) packageManager() string {
