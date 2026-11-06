@@ -47,7 +47,7 @@ func New(
 	return &GoLicenses{
 		Ctr: dag.Container().From(goImage).
 			WithExec([]string{"go", "install",
-				fmt.Sprintf("github.com/google/go-licenses@v%v", goLicensesVersion)}),
+				fmt.Sprintf("github.com/google/go-licenses/v2@v%v", goLicensesVersion)}),
 	}
 }
 
