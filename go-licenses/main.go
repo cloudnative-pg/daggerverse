@@ -17,6 +17,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"dagger/go-licenses/internal/dagger"
 )
@@ -58,9 +59,20 @@ func (m *GoLicenses) GoLicenses(
 // +optional
 // A list of arguments to pass to go-licenses.
 	args []string,
-) *dagger.Container {
-	return m.Ctr.
+// +optional
+// Environment variables for go-licenses, as KEY=VALUE. They are set after
+// go-licenses is installed, so GOOS and GOARCH only affect the analysis.
+	env []string,
+) (*dagger.Container, error) {
+	ctr := m.Ctr.
 		WithMountedDirectory("/src", source).
-		WithWorkdir("/src").
-		WithExec(append([]string{"go-licenses"}, args...))
+		WithWorkdir("/src")
+	for _, e := range env {
+		k, v, ok := strings.Cut(e, "=")
+		if !ok || k == "" {
+			return nil, fmt.Errorf("invalid env %q, want KEY=VALUE", e)
+		}
+		ctr = ctr.WithEnvVariable(k, v)
+	}
+	return ctr.WithExec(append([]string{"go-licenses"}, args...)), nil
 }
